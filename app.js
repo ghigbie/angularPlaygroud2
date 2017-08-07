@@ -1,11 +1,12 @@
 const express = require('express'),
+         path = require('path'),
           app = express();
           
-const port = process.env.PORT;
-const ip = process.env.IP;
+let port = process.env.PORT;
+let ip = process.env.IP;
 
 app.get( '/', (req, res) =>{
-   res.send("yo"); 
+   res.sendFile(path.join(__dirname, '/views', '/landing.html')); 
 });
 
 app.listen(port, ip, ()=>{

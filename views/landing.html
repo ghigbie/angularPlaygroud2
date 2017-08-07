@@ -3,34 +3,36 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./../public/stylesheets/app.css">
     </head>
     <body>
         <div class="container" ng-controller="CustomersController">
             <h1>Controllers and Modules</h1>
             
-            Filter: <input type="text" ng-model="customerFilter.name">
+            <br>
+            Filter: <input type="text" ng-model="customersFilter.name">
+            <br>
             <br>
             
             <table class="table" ng-cloak>
                 <tr>
-                    <th><strong ng-click="sortBy=doSort">Name</strong></th>
-                    <th><strong ng-click="sortBy=doSort">City</strong></th>
-                    <th><strong ng-click="sortBy=doSort">Rating</strong></th>
-                    <th><strong ng-click="sortBy=doSort">Date</strong></th>
+                    <th ng-click="doSort('name')"><strong>Name</strong></th>
+                    <th ng-click="doSort('city')"><strong>City</strong></th>
+                    <th ng-click="doSort('orderTotal')"><strong>Order Total</strong></th>
+                    <th ng-click="doSort('joined')"><strong>Date</strong></th>
                 </tr>
                 <tr ng-repeat="cust in customers | filter:customersFilter | orderBy:sortBy:reverse">
-                    <td> {{ cust.name }}</td>
-                    <td> {{ cust.city | uppercase }}</td>
-                    <td> {{ cust.orderTotal | currency }}</td>
-                    <td> {{ cust.joined | date }}</td>
+                    <td ng-cloak> {{ cust.name | uppercase }}</td>
+                    <td ng-cloak> {{ cust.city }}</td>
+                    <td ng-cloak> {{ cust.orderTotal | currency }}</td>
+                    <td ng-cloak> {{ cust.joined | date }}</td>
                 </tr>
             </table>
             <br>
-            <h3>Total Customers: {{customers.length}}</h3>
+            <h3 ng-cloak>Total Customers: {{customers.length}}</h3>
         </div>
         <script src="./../node_modules/angular/angular.min.js"></script>
         <script src="./../modules/customersApp.js"></script>
         <script src="./../controllers/customersController.js"></script>
-        
     </body>
 </html>
